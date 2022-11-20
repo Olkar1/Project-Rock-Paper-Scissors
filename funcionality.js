@@ -43,29 +43,36 @@ function getResult(playerChoise,computerChoise){
         switch(playerChoise){
             case "rock":
                 if(computerChoise == "paper"){
-                    return showResult("You lost :(");
+                    computerScore++;
+                    showResult("You lost :(");
                 }
                 else{
-                    return showResult("You won!");
+                    playerScore++;
+                    showResult("You won!");
                 }
                 break;
             case "paper":
                 if(computerChoise == "scissors"){
-                    return showResult("You lost :(");
+                    computerScore++;
+                    showResult("You lost :(");
                 }
                 else{
-                    return showResult("You won!");
+                    playerScore++;
+                    showResult("You won!");
                 }
                 break;
             case "scissors":
                 if(computerChoise == "rock"){
-                    return showResult("You lost :(");
+                    computerScore++;
+                    showResult("You lost :(");
                 }
                 else{
-                    return showResult("You won!");
+                    playerScore++;
+                    showResult("You won!");
                 }
                 break;
         }
+        console.log('player: ' + playerScore.toString() + ' - ' + 'computer: ' + computerScore.toString());
     }
 }
 
@@ -80,9 +87,16 @@ bttns.forEach(btn =>{
     btn.addEventListener('click',playRound)
 })
 
+let playerScore = 0;
+let computerScore = 0;
+
 const result = document.querySelector('.result');
-console.log(result);
 function showResult(resoult){
-    console.log(resoult);
-    result.textContent = resoult; 
+    result.textContent = resoult;
+    showScore(); 
+}
+
+const score = document.querySelector('.score');
+function showScore(){
+    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`
 }
