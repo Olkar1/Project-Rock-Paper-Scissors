@@ -23,9 +23,9 @@ function getRandomInt(min,max){
     return Math.floor(Math.random()*(max-min)+min);
 }
 
-function playRound(computerSelection){
-    const playerChoise = String(prompt("Choose your weapon")).toLowerCase();
-    const computerChoise = String(computerSelection).toLowerCase();
+function playRound(e){
+    const playerChoise = String(e.currentTarget.computedName).toLowerCase();
+    const computerChoise = String(getComputerChoise()).toLowerCase();
 
     console.log("Player choise: " + playerChoise + " Computer choise: " + computerChoise);
     
@@ -75,4 +75,8 @@ function game(numberOfGames){
     }
 }
 
-console.log(game(5));
+const bttns = document.querySelectorAll('button');
+console.log(bttns);
+bttns.forEach(btn =>{
+    btn.addEventListener('click',playRound)
+})
