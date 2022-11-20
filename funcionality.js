@@ -33,36 +33,36 @@ function playRound(e){
 }
 function getResult(playerChoise,computerChoise){
     if(playerChoise != "rock" && playerChoise != "paper" && playerChoise != "scissors"){
-        return "Unknown Pick";
+        return showResult("Unknown pick");
     }
 
     if(playerChoise == computerChoise){
-        return "Tie!";
+        return showResult("Tie");
     }
     else{
         switch(playerChoise){
             case "rock":
                 if(computerChoise == "paper"){
-                    return "You lost";
+                    return showResult("You lost :(");
                 }
                 else{
-                    return "You win";
+                    return showResult("You won!");
                 }
                 break;
             case "paper":
                 if(computerChoise == "scissors"){
-                    return "You lost";
+                    return showResult("You lost :(");
                 }
                 else{
-                    return "You win";
+                    return showResult("You won!");
                 }
                 break;
             case "scissors":
                 if(computerChoise == "rock"){
-                    return "You lost";
+                    return showResult("You lost :(");
                 }
                 else{
-                    return "You win";
+                    return showResult("You won!");
                 }
                 break;
         }
@@ -76,7 +76,13 @@ function game(numberOfGames){
 }
 
 const bttns = document.querySelectorAll('button');
-console.log(bttns);
 bttns.forEach(btn =>{
     btn.addEventListener('click',playRound)
 })
+
+const result = document.querySelector('.result');
+console.log(result);
+function showResult(resoult){
+    console.log(resoult);
+    result.textContent = resoult; 
+}
