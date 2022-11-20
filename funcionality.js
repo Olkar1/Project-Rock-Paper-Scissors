@@ -26,8 +26,6 @@ function getRandomInt(min,max){
 function playRound(e){
     const playerChoise = String(e.currentTarget.computedName).toLowerCase();
     const computerChoise = String(getComputerChoise()).toLowerCase();
-
-    console.log("Player choise: " + playerChoise + " Computer choise: " + computerChoise);
     
     return getResult(playerChoise,computerChoise);
 }
@@ -72,7 +70,10 @@ function getResult(playerChoise,computerChoise){
                 }
                 break;
         }
-        console.log('player: ' + playerScore.toString() + ' - ' + 'computer: ' + computerScore.toString());
+    }
+    if(computerScore >= 5 || playerScore >= 5){
+        let winner = computerScore > playerScore ? "Computer" : "Player";
+        showWinner(winner);
     }
 }
 
@@ -99,4 +100,17 @@ function showResult(resoult){
 const score = document.querySelector('.score');
 function showScore(){
     score.textContent = `Player: ${playerScore} Computer: ${computerScore}`
+}
+
+function resetGame(){
+    playerScore = 0;
+    computerScore =0;
+    showScore();
+    showResult('');
+
+}
+
+function showWinner(winner){
+    window.alert(`${winner} won`);
+    resetGame();
 }
