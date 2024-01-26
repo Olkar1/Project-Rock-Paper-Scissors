@@ -1,0 +1,39 @@
+
+h1{
+    color: #7a6d31;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    align-items: center;
+    background-color: #287a70;
+}
+.header{
+    display: flex;
+    height: 128px;
+    align-self: stretch;
+    background-color: #162e25;
+    justify-content: center;
+    align-items: center;
+    
+}
+.buttons{
+    margin-top: 80px;
+}
+button{
+    width: 90px;
+    height: 45px;
+    color: #7a6d31;
+    background-color: #1e232e;
+    font-size: 18px;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    gap: 5px;
+}
