@@ -23,49 +23,61 @@ function getRandomInt(min,max){
     return Math.floor(Math.random()*(max-min)+min);
 }
 
-function playRound(computerSelection){
-    const playerChoise = String(prompt("Choose your weapon")).toLowerCase();
-    const computerChoise = String(computerSelection).toLowerCase();
-
-    console.log("Player choise: " + playerChoise + " Computer choise: " + computerChoise);
+let _playerChoise;
+let _computerChoise
+function playRound(e){
+    const playerChoise = String(e.currentTarget.computedName).toLowerCase();
+    const computerChoise = String(getComputerChoise()).toLowerCase();
     
     return getResult(playerChoise,computerChoise);
 }
 function getResult(playerChoise,computerChoise){
+    _playerChoise = playerChoise;
+    _computerChoise = computerChoise;
     if(playerChoise != "rock" && playerChoise != "paper" && playerChoise != "scissors"){
-        return "Unknown Pick";
+        return showResult("Unknown pick");
     }
 
     if(playerChoise == computerChoise){
-        return "Tie!";
+        return showResult("Tie");
     }
     else{
         switch(playerChoise){
             case "rock":
                 if(computerChoise == "paper"){
-                    return "You lost";
+                    computerScore++;
+                    showResult("You lost :(");
                 }
                 else{
-                    return "You win";
+                    playerScore++;
+                    showResult("You won!");
                 }
                 break;
             case "paper":
                 if(computerChoise == "scissors"){
-                    return "You lost";
+                    computerScore++;
+                    showResult("You lost :(");
                 }
                 else{
-                    return "You win";
+                    playerScore++;
+                    showResult("You won!");
                 }
                 break;
             case "scissors":
                 if(computerChoise == "rock"){
-                    return "You lost";
+                    computerScore++;
+                    showResult("You lost :(");
                 }
                 else{
-                    return "You win";
+                    playerScore++;
+                    showResult("You won!");
                 }
                 break;
         }
+    }
+    if(computerScore >= 5 || playerScore >= 5){
+        let winner = computerScore > playerScore ? "Computer" : "Player";
+        showWinner(winner);
     }
 }
 
@@ -75,4 +87,40 @@ function game(numberOfGames){
     }
 }
 
-console.log(game(5));
+const bttns = document.querySelectorAll('button');
+bttns.forEach(btn =>{
+    btn.addEventListener('click',playRound)
+})
+
+let playerScore = 0;
+let computerScore = 0;
+
+const _game = document.querySelector('.game');
+function ShowCurrentRound(){
+    _game.textContent = `Player choose: ${_playerChoise} <VS> Computer choose: ${_computerChoise}`
+}
+
+const result = document.querySelector('.result');
+function showResult(resoult){
+    result.textContent = resoult;
+    showScore(); 
+}
+
+const score = document.querySelector('.score');
+function showScore(){
+    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`
+    ShowCurrentRound();
+}
+
+function resetGame(){
+    playerScore = 0;
+    computerScore =0;
+    showScore();
+    showResult('');
+    _game.textContent = '';
+}
+
+function showWinner(winner){
+    window.alert(`${winner} won`);
+    resetGame();
+}
