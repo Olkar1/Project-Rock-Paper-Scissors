@@ -23,6 +23,8 @@ function getRandomInt(min,max){
     return Math.floor(Math.random()*(max-min)+min);
 }
 
+let _playerChoise;
+let _computerChoise
 function playRound(e){
     const playerChoise = String(e.currentTarget.computedName).toLowerCase();
     const computerChoise = String(getComputerChoise()).toLowerCase();
@@ -30,6 +32,8 @@ function playRound(e){
     return getResult(playerChoise,computerChoise);
 }
 function getResult(playerChoise,computerChoise){
+    _playerChoise = playerChoise;
+    _computerChoise = computerChoise;
     if(playerChoise != "rock" && playerChoise != "paper" && playerChoise != "scissors"){
         return showResult("Unknown pick");
     }
@@ -91,6 +95,11 @@ bttns.forEach(btn =>{
 let playerScore = 0;
 let computerScore = 0;
 
+const _game = document.querySelector('.game');
+function ShowCurrentRound(){
+    _game.textContent = `Player choose: ${_playerChoise} <VS> Computer choose: ${_computerChoise}`
+}
+
 const result = document.querySelector('.result');
 function showResult(resoult){
     result.textContent = resoult;
@@ -100,6 +109,7 @@ function showResult(resoult){
 const score = document.querySelector('.score');
 function showScore(){
     score.textContent = `Player: ${playerScore} Computer: ${computerScore}`
+    ShowCurrentRound();
 }
 
 function resetGame(){
@@ -107,7 +117,7 @@ function resetGame(){
     computerScore =0;
     showScore();
     showResult('');
-
+    _game.textContent = '';
 }
 
 function showWinner(winner){
